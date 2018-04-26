@@ -1,0 +1,22 @@
+{
+  "name": "savemetenminutes/crawlbot",
+  "description": "SaveMeTenMinutes Crawlbot",
+  "type": "library",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "savemetenminutes",
+    "crawlbot"
+  ],
+  "homepage": "https://github.com/savemetenminutes/crawlbot",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "^7.0",
+    "savemetenminutes/http": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Smtm\\Crawlbot\\": "./src/"
+    }
+  },
+}
