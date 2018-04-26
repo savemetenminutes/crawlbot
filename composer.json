@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Smtm\\Crawlbot\\": "vendor/savemetenminutes/crawlbot/src/"
+            "Smtm\\Crawlbot\\": "src/"
         }
     }
 }
