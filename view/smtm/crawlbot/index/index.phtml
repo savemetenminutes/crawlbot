@@ -1,0 +1,41 @@
+<div class="jumbotron">
+	<?php
+	/*
+	$form = $this->form;
+	$form->prepare();
+
+	// Assuming the "contact/process" route exists...
+	$form->setAttribute('action', $this->url('contact/process'));
+
+	// Set the method attribute for the form
+	$form->setAttribute('method', 'post');
+
+	// Render the opening tag
+	echo $this->form()->openTag($form);
+	?>
+	<div class="form_element">
+        <?= $this->formRow($form->get('name')) ?>
+	</div>
+
+	<div class="form_element">
+        <?= $this->formRow($form->get('captcha')) ?>
+	</div>
+
+    <?= $this->formElement($form->get('security')) ?>
+    <?= $this->formElement($form->get('send')) ?>
+
+    <?= $this->form()->closeTag() ?>
+	*/
+	?>
+	<?php
+	$form = $this->form;
+
+	// Assuming the "contact/process" route exists...
+	//$form->setAttribute('action', $this->url('contact/process'));
+
+	// Set the method attribute for the form
+	$form->setAttribute('method', 'post');
+
+	echo $this->form($form);
+	?>
+</div>

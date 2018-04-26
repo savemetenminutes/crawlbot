@@ -12,7 +12,7 @@
   "prefer-stable": true,
   "require": {
     "php": "^7.0",
-    "savemetenminutes/http": "^1.0"
+    "savemetenminutes/http": "dev-master"
   },
   "autoload": {
     "psr-4": {
