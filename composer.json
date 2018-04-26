@@ -1,22 +1,22 @@
 {
-  "name": "savemetenminutes/crawlbot",
-  "description": "SaveMeTenMinutes Crawlbot",
-  "type": "library",
-  "license": "BSD-3-Clause",
-  "keywords": [
-    "savemetenminutes",
-    "crawlbot"
-  ],
-  "homepage": "https://github.com/savemetenminutes/crawlbot",
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require": {
-    "php": "^7.0",
-    "savemetenminutes/http": "dev-master"
-  },
-  "autoload": {
-    "psr-4": {
-      "Smtm\\Crawlbot\\": "./src/"
+    "name": "savemetenminutes/crawlbot",
+    "description": "SaveMeTenMinutes Crawlbot",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "savemetenminutes",
+        "crawlbot"
+    ],
+    "homepage": "https://github.com/savemetenminutes/crawlbot",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.0",
+        "savemetenminutes/http": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Smtm\\Crawlbot\\": "src/"
+        }
     }
-  },
 }
