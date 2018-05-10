@@ -1,4 +1,5 @@
 <div class="jumbotron">
+	<h1>Interactive Website Crawlbot</h1>
 	<?php
 	/*
 	$form = $this->form;
@@ -29,13 +30,32 @@
 	?>
 	<?php
 	$form = $this->form;
+    $form->prepare();
+    //echo $this->form()->render($form);
 
-	// Assuming the "contact/process" route exists...
-	//$form->setAttribute('action', $this->url('contact/process'));
-
-	// Set the method attribute for the form
-	$form->setAttribute('method', 'post');
-
-	echo $this->form($form);
+	echo $this->form()->openTag($form);
+	foreach($form->getFieldsets() as $fieldset) {
+		//echo $this->form()->openTag($fieldset);
+		foreach($fieldset->getElements() as $element) {
+			?>
+			<div class="form-group">
+				<?= (null !== $element->getLabel()) ? $this->formLabel($element) : '' ?>
+				<?= $this->formElement($element) ?>
+				<?= $this->formElementErrors()->render($element, ['class' => 'help-block']) ?>
+			</div>
+			<?php
+		}
+        //echo $this->form()->closeTag($fieldset);
+    }
+    foreach($form->getElements() as $element) {
+        ?>
+		<div class="form-group">
+            <?= (null !== $element->getLabel()) ? $this->formLabel($element) : '' ?>
+            <?= $this->formElement($element) ?>
+            <?= $this->formElementErrors()->render($element, ['class' => 'help-block']) ?>
+		</div>
+        <?php
+    }
+    echo $this->form()->closeTag();
 	?>
 </div>

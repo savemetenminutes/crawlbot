@@ -2,11 +2,17 @@
 
 namespace Smtm\Crawlbot;
 
+use Smtm\Crawlbot\Container\Factory\TranslatorAwareFormElementDelegatorFactory;
 use Smtm\Crawlbot\Controller\Factory\IndexControllerFactory;
-use Smtm\Crawlbot\Form\Factory\IndexFormFactory;
-use Smtm\Crawlbot\Form\IndexForm;
-use Smtm\Crawlbot\Service\ClientFactory;
+use Smtm\Crawlbot\Form\CrawlSubmitButtonDecorator;
+use Smtm\Crawlbot\Form\DbTableSuffixTextInputDecorator;
+use Smtm\Crawlbot\Form\DefaultUrlSchemeSelectDecorator;
+use Smtm\Crawlbot\Form\EntryPointUriTextInputDecorator;
+use Smtm\Crawlbot\Service\Crawlbot;
+use Smtm\Crawlbot\Service\Factory\ClientFactory;
+use Smtm\Crawlbot\Service\Factory\CrawlbotFactory;
 use Smtm\Http\Client;
+use Zend\Form\Element;
 use Zend\I18n\Translator\TranslatorServiceFactory;
 use Zend\I18n\Translator\Translator;
 
@@ -16,8 +22,8 @@ return [
     'service_manager' => [
         'factories' => [
             Translator::class => TranslatorServiceFactory::class,
-            IndexForm::class => IndexFormFactory::class,
             Client::class => ClientFactory::class,
+            Crawlbot::class => CrawlbotFactory::class,
         ],
     ],
 
