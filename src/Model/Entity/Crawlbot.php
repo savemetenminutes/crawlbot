@@ -2,17 +2,20 @@
 
 namespace Smtm\Crawlbot\Model\Entity;
 
-class Crawlbot
+class Crawlbot implements \JsonSerializable
 {
     protected $id;
     protected $dbTableSuffix;
     protected $defaultUrlScheme;
+    protected $useCookies;
     protected $entryPointUri;
-    protected $urls;
-    protected $currentUrl;
-    protected $currentIndex;
-    protected $urlCount;
-    protected $entryPointPageUrlCount;
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+        ];
+    }
 
     /**
      * @return mixed
@@ -71,6 +74,24 @@ class Crawlbot
     /**
      * @return mixed
      */
+    public function getUseCookies()
+    {
+        return $this->useCookies;
+    }
+
+    /**
+     * @param mixed $useCookies
+     * @return Crawlbot
+     */
+    public function setUseCookies($useCookies)
+    {
+        $this->useCookies = $useCookies;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getEntryPointUri()
     {
         return $this->entryPointUri;
@@ -83,96 +104,6 @@ class Crawlbot
     public function setEntryPointUri($entryPointUri)
     {
         $this->entryPointUri = $entryPointUri;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUrls()
-    {
-        return $this->urls;
-    }
-
-    /**
-     * @param mixed $urls
-     * @return Crawlbot
-     */
-    public function setUrls($urls)
-    {
-        $this->urls = $urls;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCurrentUrl()
-    {
-        return $this->currentUrl;
-    }
-
-    /**
-     * @param mixed $currentUrl
-     * @return Crawlbot
-     */
-    public function setCurrentUrl($currentUrl)
-    {
-        $this->currentUrl = $currentUrl;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCurrentIndex()
-    {
-        return $this->currentIndex;
-    }
-
-    /**
-     * @param mixed $currentIndex
-     * @return Crawlbot
-     */
-    public function setCurrentIndex($currentIndex)
-    {
-        $this->currentIndex = $currentIndex;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUrlCount()
-    {
-        return $this->urlCount;
-    }
-
-    /**
-     * @param mixed $urlCount
-     * @return Crawlbot
-     */
-    public function setUrlCount($urlCount)
-    {
-        $this->urlCount = $urlCount;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEntryPointPageUrlCount()
-    {
-        return $this->entryPointPageUrlCount;
-    }
-
-    /**
-     * @param mixed $entryPointPageUrlCount
-     * @return Crawlbot
-     */
-    public function setEntryPointPageUrlCount($entryPointPageUrlCount)
-    {
-        $this->entryPointPageUrlCount = $entryPointPageUrlCount;
         return $this;
     }
 }

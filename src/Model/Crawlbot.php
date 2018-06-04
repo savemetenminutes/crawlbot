@@ -1,18 +1,19 @@
 <?php
 namespace Smtm\Crawlbot\Model;
 
+use JsonSerializable;
 use Smtm\Crawlbot\Model\Entity\Crawlbot as EntityCrawlbot;
 use Smtm\Zfx\Db\Sql\Ddl\CreateTable as Zfx_CreateTable;
 use Smtm\Zfx\Db\Sql\Ddl\AlterTable as Zfx_AlterTable;
 use Smtm\Zfx\Db\Sql\Ddl\TruncateTable as Zfx_TruncateTable;
 use Smtm\Zfx\Db\TableGateway\RelationalTableGateway;
-
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql as Sql;
 use Zend\Db\Sql\Insert as Insert;
 use Zend\Db\Sql\Select as Select;
 
-class CrawlbotTable extends RelationalTableGateway implements CrawlbotTableInterface {
+class Crawlbot extends RelationalTableGateway implements CrawlbotInterface
+{
     protected $crawlbot;
     /*
     public function __construct(AdapterInterface ...$adapters) {
@@ -29,37 +30,34 @@ class CrawlbotTable extends RelationalTableGateway implements CrawlbotTableInter
     }
 
     /**
-     * @param EntityCrawlbot $crawlbot
-     * @return CrawlbotTable
+     * @param EntityCrawlbot $entityCrawlbot
+     * @return Crawlbot
      */
-    public function setCrawlbot(EntityCrawlbot $crawlbot): CrawlbotTable
+    public function setCrawlbot(EntityCrawlbot $entityCrawlbot): Crawlbot
     {
-        $this->crawlbot = $crawlbot;
+        $this->crawlbot = $entityCrawlbot;
         return $this;
     }
 
-    public function init(EntityCrawlbot $crawlbot) {
-        $this->setCrawlbot($crawlbot);
-        $this->createTables();
+    public function init(EntityCrawlbot $entityCrawlbot) {
+        $this->setCrawlbot($entityCrawlbot);
+        $this->setTableSuffix($entityCrawlbot->getDbTableSuffix());
     }
 
-    protected function createTables()
+    public function createTables()
     {
-        $dbTableSuffix = $this->getCrawlbot()->getDbTableSuffix();
-        $dbTableSuffix = ($dbTableSuffix === null || $dbTableSuffix === '') ? date('_-_Y-m-d_H-i-s') : $dbTableSuffix;
-        $this->getCrawlbot()->setDbTableSuffix($dbTableSuffix);
-
         foreach($this->getEntityDefinitions() as $entity => $entityDefinition) {
-            if($entityDefinition[self::TABLE_IDENTIFIER]->getTable() === self::TABLE_CRAWLBOT) {
+            $baseTableIdentifier = $this->getBaseTableIdentifier($entity);
+            if($baseTableIdentifier->getTable() === self::TABLE_CRAWLBOT) {
                 continue;
             }
+            $tableIdentifier = $this->getTableIdentifier($entity);
             $adapter = $this->getAdapter($entityDefinition[self::ADAPTER]);
             $sql = $this->getAdapterDefinition($entityDefinition[self::ADAPTER])[self::TABLE_GATEWAY]->getSql();
-            $tableName = $entityDefinition[self::TABLE_IDENTIFIER]->getTable();
             $newTable = new Zfx_CreateTable();
-            $newTable->setTable($tableName.$dbTableSuffix);
+            $newTable->setTable($tableIdentifier->getTable());
             $newTable->setIfNotExists(true);
-            $newTable->copyTableStructure($tableName, $adapter);
+            $newTable->copyTableStructure($baseTableIdentifier->getTable(), $adapter);
             $query = $sql->buildSqlString($newTable, $adapter);
             $adapter->query(
                 $query,
@@ -141,52 +139,4 @@ class CrawlbotTable extends RelationalTableGateway implements CrawlbotTableInter
         //$this->db->setQuery($query);
         //$this->db->execute();
     }
-
-    public function fetchAll() {
-        return $this->tableGateway->select();
-    }
-
-    public function select($columns = ['*'], $where = null, $limit = null) {
-        $select = new Select();
-        $select->columns($columns);
-        if(!empty($where)) {
-            $select->where($where);
-        }
-        if(!empty((int)$limit)) {
-            $select->limit((int)$limit);
-        }
-        return $this->tableGateway->selectWith($select);
-    }
-
-    public function save(Array $attr) {
-        $id = (!empty($attr['id'])?(int)$attr['id']:0);
-        if ($id === 0) {
-            $this->tableGateway->insert($attr);
-            $id = $this->tableGateway->getLastInsertValue();
-        } else if ($this->select(
-            [
-                'id'=>$id
-            ]
-        )) {
-            $this->tableGateway->update($attr, ['id' => $id]);
-        } else {
-            try {
-                throw new \Exception('Cannot update row. No matching row id found.', 0);
-            } catch(\Exception $e) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public function deleteRow($id) {
-        $this->tableGateway->delete(
-            [
-                'id' => (int) $id
-            ]
-        );
-    }
-
-
 }

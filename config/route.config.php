@@ -54,7 +54,7 @@ return [
                                     'action'     => 'crawlIterate',
                                 ],
                                 'constraints' => [
-                                    'id' => '^\d+$',
+                                    'id' => '\d+$',
                                 ],
                             ],
                         ],

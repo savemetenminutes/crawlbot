@@ -4,11 +4,13 @@ namespace Smtm\Crawlbot\Model\Entity;
 
 class CrawlbotH4
 {
+    const TAG_NAME = 'h4';
+    const ATTRIBUTE_NAME_URL = null;
+
     protected $id;
-    protected $crawl_id;
-    protected $tag_html;
-    protected $url;
-    protected $url_table_id;
+    protected $crawlId;
+    protected $uriCrawledId;
+    protected $tagHtml;
 
     /**
      * @return mixed
@@ -20,7 +22,7 @@ class CrawlbotH4
 
     /**
      * @param mixed $id
-     * @return CrawlbotA
+     * @return CrawlbotH4
      */
     public function setId($id)
     {
@@ -33,16 +35,34 @@ class CrawlbotH4
      */
     public function getCrawlId()
     {
-        return $this->crawl_id;
+        return $this->crawlId;
     }
 
     /**
-     * @param mixed $crawl_id
-     * @return CrawlbotA
+     * @param mixed $crawlId
+     * @return CrawlbotH4
      */
-    public function setCrawlId($crawl_id)
+    public function setCrawlId($crawlId)
     {
-        $this->crawl_id = $crawl_id;
+        $this->crawlId = $crawlId;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUriCrawledId()
+    {
+        return $this->uriCrawledId;
+    }
+
+    /**
+     * @param mixed $uriCrawledId
+     * @return CrawlbotH4
+     */
+    public function setUriCrawledId($uriCrawledId)
+    {
+        $this->uriCrawledId = $uriCrawledId;
         return $this;
     }
 
@@ -51,52 +71,16 @@ class CrawlbotH4
      */
     public function getTagHtml()
     {
-        return $this->tag_html;
+        return $this->tagHtml;
     }
 
     /**
-     * @param mixed $tag_html
-     * @return CrawlbotA
+     * @param mixed $tagHtml
+     * @return CrawlbotH4
      */
-    public function setTagHtml($tag_html)
+    public function setTagHtml($tagHtml)
     {
-        $this->tag_html = $tag_html;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @param mixed $url
-     * @return CrawlbotA
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUrlTableId()
-    {
-        return $this->url_table_id;
-    }
-
-    /**
-     * @param mixed $url_table_id
-     * @return CrawlbotA
-     */
-    public function setUrlTableId($url_table_id)
-    {
-        $this->url_table_id = $url_table_id;
+        $this->tagHtml = $tagHtml;
         return $this;
     }
 }

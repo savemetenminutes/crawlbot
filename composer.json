@@ -1,6 +1,6 @@
 {
     "name": "savemetenminutes/crawlbot",
-    "description": "SaveMeTenMinutes Crawlbot",
+    "description": "save me ten minutes - interactive website crawlbot (zend framework)",
     "type": "library",
     "license": "BSD-3-Clause",
     "keywords": [

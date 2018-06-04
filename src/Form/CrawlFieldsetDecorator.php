@@ -12,12 +12,14 @@ class CrawlFieldsetDecorator extends InputFilterProviderFieldset
 
     protected $dbTableSuffixTextInput;
     protected $defaultUrlSchemeSelect;
+    protected $useCookiesSelect;
     protected $entryPointUrlTextInput;
 
-    public function __construct($name = null, $options = [], ElementInterface $dbTableSuffixTextInput, ElementInterface $defaultSchemeSelect, ElementInterface $entryPointUrlTextInput)
+    public function __construct($name = null, $options = [], ElementInterface $dbTableSuffixTextInput, ElementInterface $defaultSchemeSelect, ElementInterface $useCookiesSelect, ElementInterface $entryPointUrlTextInput)
     {
         $this->dbTableSuffixTextInput   = $dbTableSuffixTextInput;
         $this->defaultUrlSchemeSelect   = $defaultSchemeSelect;
+        $this->useCookiesSelect         = $useCookiesSelect;
         $this->entryPointUrlTextInput   = $entryPointUrlTextInput;
         // Create a CSRF token:
         //$csrf = new Element\Csrf('security');
@@ -29,6 +31,7 @@ class CrawlFieldsetDecorator extends InputFilterProviderFieldset
     {
         $this->add($this->dbTableSuffixTextInput);
         $this->add($this->defaultUrlSchemeSelect);
+        $this->add($this->useCookiesSelect);
         $this->add($this->entryPointUrlTextInput);
         $this->setObject(new Crawlbot());
         /*

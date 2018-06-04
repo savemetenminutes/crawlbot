@@ -7,6 +7,7 @@ use Smtm\Crawlbot\Form\DbTableSuffixTextInputDecorator;
 use Smtm\Crawlbot\Form\DefaultUrlSchemeSelectDecorator;
 use Smtm\Crawlbot\Form\EntryPointUriTextInputDecorator;
 use Smtm\Crawlbot\Form\CrawlFieldsetDecorator;
+use Smtm\Crawlbot\Form\UseCookiesSelectDecorator;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 class CrawlFieldsetFactory implements FactoryInterface
@@ -15,7 +16,8 @@ class CrawlFieldsetFactory implements FactoryInterface
     {
         $formElementManager = $container->get('FormElementManager');
         $dbTableSuffixTextInput = $formElementManager->get(DbTableSuffixTextInputDecorator::class);
-        $defaultSchemeSelect = $formElementManager->get(DefaultUrlSchemeSelectDecorator::class);
+        $defaultSchemeSelect    = $formElementManager->get(DefaultUrlSchemeSelectDecorator::class);
+        $useCookiesSelect       = $formElementManager->get(UseCookiesSelectDecorator::class);
         $entryPointUrlTextInput = $formElementManager->get(EntryPointUriTextInputDecorator::class);
 
         $mainFieldset =
@@ -26,6 +28,7 @@ class CrawlFieldsetFactory implements FactoryInterface
                 ],
                 $dbTableSuffixTextInput,
                 $defaultSchemeSelect,
+                $useCookiesSelect,
                 $entryPointUrlTextInput
             );
 
